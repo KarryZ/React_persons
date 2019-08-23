@@ -11,17 +11,6 @@
             showPersons: false
         }
 
-
-    switchNameHandler = (newName) => {
-        this.setState({
-            persons: [
-                {name: newName, age: 123},
-                {name: "Nick1", age: 125},
-                {name: "Alex1", age: 128}
-            ]
-        })
-    }
-
     onChangeNameHandler = (oEvent) => {
         this.setState({
             persons: [
@@ -31,10 +20,17 @@
             ]
         })
     }
-togglePersonsHandler = () => {
-    const bShowPersons = this.state.showPersons;
-    this.setState({showPersons: !bShowPersons})
-}
+
+    togglePersonsHandler = () => {
+        const bShowPersons = this.state.showPersons;
+        this.setState({showPersons: !bShowPersons})
+    }
+
+    deletePerson = (indexPeson) => {
+        const personsList = this.state.persons;
+        personsList.splice(indexPeson, 1);
+        this.setState({persons: personsList})
+    }
 
         render() {
              const style = {
@@ -49,13 +45,14 @@ togglePersonsHandler = () => {
             let persons = null;
             if(this.state.showPersons){
                 persons = (<div>
-                           {this.state.persons.map((person,ind) => {
+                           {this.state.persons.map((person, ind) => {
                                 return (
                                     <Person
                                         key={ind}
                                         name={person.name}
                                         age={person.age}
-                                        changed={this.onChangeNameHandler}/>
+                                        changed={this.onChangeNameHandler}
+                                        delete={this.deletePerson.bind(this, ind)}/>
                                 )
 
                            })}
