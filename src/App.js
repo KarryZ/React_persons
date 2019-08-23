@@ -5,18 +5,18 @@
     class App extends Component {
         state = {
             persons: [
-                {name: "Max", age: 23},
-                {name: "Nick", age: 25},
-                {name: "Alex", age: 28} ],
+                {id: 'person1', name: "Max", age: 23},
+                {id: 'person2', name: "Nick", age: 25},
+                {id: 'person3', name: "Alex", age: 28} ],
             showPersons: false
         }
 
     onChangeNameHandler = (oEvent) => {
         this.setState({
             persons: [
-                {name: oEvent.target.value, age: 23},
-                {name: "Nick", age: 25},
-                {name: "Alex", age: 28}
+                {id: 'person1', name: oEvent.target.value, age: 23},
+                {id: 'person2', name: "Nick", age: 25},
+                {id: 'person3', name: "Alex", age: 28}
             ]
         })
     }
@@ -27,7 +27,7 @@
     }
 
     deletePerson = (indexPeson) => {
-        const personsList = this.state.persons;
+        const personsList = [...this.state.persons];//slice(copy) array to new
         personsList.splice(indexPeson, 1);
         this.setState({persons: personsList})
     }
@@ -48,11 +48,11 @@
                            {this.state.persons.map((person, ind) => {
                                 return (
                                     <Person
-                                        key={ind}
+                                        key={person.id}
                                         name={person.name}
                                         age={person.age}
                                         changed={this.onChangeNameHandler}
-                                        delete={this.deletePerson.bind(this, ind)}/>
+                                        delete={this.deletePerson.bind(this, person.id)}/>
                                 )
 
                            })}
