@@ -1,5 +1,5 @@
     import React, { Component} from 'react';
-    import Radium from 'radium';
+    import Radium, {StyleRoot} from 'radium';
     import './App.css';
     import Person from './Person/Person.js';
 
@@ -88,12 +88,14 @@
             }
 
             return (
+                <StyleRoot>
                      <div className = "App">
                             <h1> Hi, I 'm React App!</h1>
                             <p className={classes.join(' ')}>it's working!</p>
                             <button style={style} onClick={this.togglePersonsHandler.bind(this, 'MaxC1')}> Show persons </button>
                             {persons}
                         </div>
+                </StyleRoot>
                         // React.createElement('div', {className: "App"}, React.createElement('h1', null, 'Hi, i\'m a React App!!!') )
                     );
         }
