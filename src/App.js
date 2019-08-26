@@ -11,13 +11,17 @@
             showPersons: false
         }
 
-    onChangeNameHandler = (oEvent) => {
+    onChangeNameHandler = (oEvent, id) => {
+        const currentPersonIndex = this.state.persons.findIndex(person => person.id === id);
+
+        const person = {...this.state.persons[currentPersonIndex]};
+        person.name = oEvent.target.value;
+
+        const persons = [...this.state.persons];
+        persons[currentPersonIndex] = person;
+
         this.setState({
-            persons: [
-                {id: 'person1', name: oEvent.target.value, age: 23},
-                {id: 'person2', name: "Nick", age: 25},
-                {id: 'person3', name: "Alex", age: 28}
-            ]
+            persons: persons
         })
     }
 
@@ -51,8 +55,8 @@
                                         key={person.id}
                                         name={person.name}
                                         age={person.age}
-                                        changed={this.onChangeNameHandler}
-                                        delete={this.deletePerson.bind(this, person.id)}/>
+                                        changed={ (oEvent) => this.onChangeNameHandler(oEvent, person.id)}
+                                        deletePerson ={this.deletePerson.bind(this, ind)}/>
                                 )
 
                            })}
