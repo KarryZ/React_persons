@@ -1,4 +1,5 @@
     import React, { Component} from 'react';
+    import Radium from 'radium';
     import './App.css';
     import Person from './Person/Person.js';
 
@@ -38,11 +39,16 @@
 
         render() {
              const style = {
-                    backgroundColor: 'white',
+                    backgroundColor: 'green',
+                    color: 'white',
                     font: 'inherit',
                     border: '1px solid blue',
                     padding: '8px',
-                    cursor: 'pointer'
+                    cursor: 'pointer',
+                    ':hover': {
+                        backgroundColor: 'lightgreen',
+                        color: 'black'
+                    }
 
                 };
 
@@ -62,13 +68,29 @@
                            })}
 
 
-                    </div>)
+                    </div>
+                );
+                style.backgroundColor = 'red';
+                style[':hover'] = {
+                    backgroundColor:'salmon',
+                    color: 'black'
+                };
 
+            }
+
+            let classes = [];
+
+            if(this.state.persons.length <= 2) {
+                classes.push('red')
+            }
+            if(this.state.persons.length <= 1) {
+                classes.push('bold')
             }
 
             return (
                      <div className = "App">
                             <h1> Hi, I 'm React App!</h1>
+                            <p className={classes.join(' ')}>it's working!</p>
                             <button style={style} onClick={this.togglePersonsHandler.bind(this, 'MaxC1')}> Show persons </button>
                             {persons}
                         </div>
@@ -76,5 +98,5 @@
                     );
         }
     }
-    export default App;
+    export default Radium(App);
 
