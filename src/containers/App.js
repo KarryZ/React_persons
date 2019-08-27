@@ -1,6 +1,7 @@
     import React, { Component} from 'react';
     import classes from './App.css';
-    import Person from './Person/Person.js';
+    import Persons from '../components/Persons/Persons';
+    import Cockpit from '../components/Cockpit/Cockpit'
 
     class App extends Component {
         state = {
@@ -40,22 +41,13 @@
             let persons = null;
             let btnClass = null; //or empty str
             if(this.state.showPersons){
-                persons = (<div>
-                           {this.state.persons.map((person, ind) => {
-                                return (
-                                    <Person
-                                        key={person.id}
-                                        name={person.name}
-                                        age={person.age}
-                                        changed={ (oEvent) => this.onChangeNameHandler(oEvent, person.id)}
-                                        deletePerson ={this.deletePerson.bind(this, ind)}/>
-                                )
+               persons = (<div>
+                          <Persons
+                            persons={this.state.persons}
+                            changed={this.onChangeNameHandler}
+                            deletePerson={this.deletePerson}/>;
+                          </div>)
 
-                           })}
-
-
-                    </div>
-                );
                 btnClass = classes.Red;
             }
 
@@ -71,9 +63,9 @@
             return (
 
                      <div className={classes.App}>
-                            <h1> Hi, I 'm React App!</h1>
-                            <p className={assignedClasses.join(' ')}>it's working!</p>
-                            <button className={btnClass} onClick={this.togglePersonsHandler.bind(this, 'MaxC1')}> Show persons </button>
+                            <Cockpit
+                                    togglePersonsHandler={this.togglePersonsHandler.bind(this, 'MaxC1')}
+                                    classNameButton={btnClass} classNameParagraph={assignedClasses}/>
                             {persons}
                         </div>
 
