@@ -37,16 +37,8 @@
     }
 
         render() {
-             const style = {
-                    backgroundColor: 'green',
-                    color: 'white',
-                    font: 'inherit',
-                    border: '1px solid blue',
-                    padding: '8px',
-                    cursor: 'pointer',
-                   };
-
             let persons = null;
+            let btnClass = null; //or empty str
             if(this.state.showPersons){
                 persons = (<div>
                            {this.state.persons.map((person, ind) => {
@@ -64,9 +56,7 @@
 
                     </div>
                 );
-                style.backgroundColor = 'red';
-
-
+                btnClass = classes.Red;
             }
 
             let assignedClasses = [];
@@ -83,7 +73,7 @@
                      <div className={classes.App}>
                             <h1> Hi, I 'm React App!</h1>
                             <p className={assignedClasses.join(' ')}>it's working!</p>
-                            <button style={style} onClick={this.togglePersonsHandler.bind(this, 'MaxC1')}> Show persons </button>
+                            <button className={btnClass} onClick={this.togglePersonsHandler.bind(this, 'MaxC1')}> Show persons </button>
                             {persons}
                         </div>
 
