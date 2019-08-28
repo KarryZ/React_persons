@@ -45,7 +45,7 @@
                           <Persons
                             persons={this.state.persons}
                             changed={this.onChangeNameHandler}
-                            deletePerson={this.deletePerson}/>;
+                            deletePerson={this.deletePerson}/>
                           </div>)
             }
 
@@ -55,6 +55,7 @@
 
                      <div className={classes.App}>
                             <Cockpit
+                                    appTitle={this.props.appTitle}
                                     togglePersonsHandler={this.togglePersonsHandler.bind(this, 'MaxC1')}
                                     showPersonsState={this.state.showPersons}
                                     persons={this.state.persons}/>
