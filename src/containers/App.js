@@ -39,7 +39,7 @@
 
         render() {
             let persons = null;
-            let btnClass = null; //or empty str
+
             if(this.state.showPersons){
                persons = (<div>
                           <Persons
@@ -47,25 +47,17 @@
                             changed={this.onChangeNameHandler}
                             deletePerson={this.deletePerson}/>;
                           </div>)
-
-                btnClass = classes.Red;
             }
 
-            let assignedClasses = [];
 
-            if(this.state.persons.length <= 2) {
-                assignedClasses.push(classes.red)
-            }
-            if(this.state.persons.length <= 1) {
-                assignedClasses.push(classes.bold)
-            }
 
             return (
 
                      <div className={classes.App}>
                             <Cockpit
                                     togglePersonsHandler={this.togglePersonsHandler.bind(this, 'MaxC1')}
-                                    classNameButton={btnClass} classNameParagraph={assignedClasses}/>
+                                    showPersonsState={this.state.showPersons}
+                                    persons={this.state.persons}/>
                             {persons}
                         </div>
 
