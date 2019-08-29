@@ -13,7 +13,8 @@
                 {id: 'person1', name: "Max", age: 23},
                 {id: 'person2', name: "Nick", age: 25},
                 {id: 'person3', name: "Alex", age: 28} ],
-            showPersons: false
+            showPersons: false,
+            showCockpit: true
         }
 
     static getDerivedStateFromProps(props, state) { // chage states and props
@@ -26,10 +27,10 @@
 
     shouldComponentUpdate(nextProps, nextState) { //can be used for perfomance improvement
         console.log('[App.js] shouldComponentUpdate');
-        return true; //if false component won't update
+        return true;
     }
 
-    componentDidUpdate() { // there you can add http request
+    componentDidUpdate() { // there you can add http request; not called after initiation
         console.log('[App.js] componentDidUpdate');
     }
 
@@ -59,6 +60,11 @@
         this.setState({persons: personsList})
     }
 
+    toggleCockpit = () => {
+        const bShowCockpit = this.state.showCockpit;
+        this.setState({showCockpit: !bShowCockpit})
+    }
+
         render() {
             let persons = null;
 
@@ -76,11 +82,15 @@
             return (
 
                      <div className={classes.App}>
-                            <Cockpit
+                          <button onClick={this.toggleCockpit}>Remove Cockpit</button>
+                          {this.state.showCockpit ?
+                                <Cockpit
                                     appTitle={this.props.appTitle}
                                     togglePersonsHandler={this.togglePersonsHandler.bind(this, 'MaxC1')}
                                     showPersonsState={this.state.showPersons}
-                                    persons={this.state.persons}/>
+                                    personsLength={this.state.persons.length}/> : null
+                          }
+
                             {persons}
                         </div>
 

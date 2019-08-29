@@ -1,7 +1,24 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import classes from './Cockpit.css';
 
 const cockpit = (props) => {
+
+    useEffect(() => { //runs when component created and update; combine componentDidMount and componentDidUpdate
+        console.log('[Cockpit.js] UseEffect');
+        //Http request...
+        const timer = setTimeout(() => {
+            alert('Saved data to cloud')
+        }, 1000)
+
+        return () => {
+            clearTimeout(timer);
+            console.log('[Cockpit.js] UseEffect cleanup work')
+        }
+    }, []);// should run whenever dependencies in arr changes; if add empty arr it execute only in init
+
+
+    //useEffect(() => {}) use as many times as i want
+
     let btnClass = null; //or empty str
 
     if(props.showPersons){
@@ -11,10 +28,10 @@ const cockpit = (props) => {
 
     let assignedClasses = [];
 
-    if(props.persons.length <= 2) {
+    if(props.personsLength <= 2) {
         assignedClasses.push(classes.red)
     }
-    if(props.persons.length <= 1) {
+    if(props.personsLength <= 1) {
         assignedClasses.push(classes.bold)
     }
 
@@ -27,4 +44,4 @@ const cockpit = (props) => {
     )
 }
 
-export default cockpit;
+export default React.memo(cockpit);
