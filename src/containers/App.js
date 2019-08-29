@@ -4,6 +4,10 @@
     import Cockpit from '../components/Cockpit/Cockpit'
 
     class App extends Component {
+        constructor(props) {
+            super(props);
+        }
+
         state = {
             persons: [
                 {id: 'person1', name: "Max", age: 23},
@@ -11,6 +15,24 @@
                 {id: 'person3', name: "Alex", age: 28} ],
             showPersons: false
         }
+
+    static getDerivedStateFromProps(props, state) { // chage states and props
+        return state;
+    }
+
+    componentDidMount() { // there you can add http request
+        console.log('[App.js] componentDidMount');
+    }
+
+    shouldComponentUpdate(nextProps, nextState) { //can be used for perfomance improvement
+        console.log('[App.js] shouldComponentUpdate');
+        return true; //if false component won't update
+    }
+
+    componentDidUpdate() { // there you can add http request
+        console.log('[App.js] componentDidUpdate');
+    }
+
 
     onChangeNameHandler = (oEvent, id) => {
         const currentPersonIndex = this.state.persons.findIndex(person => person.id === id);

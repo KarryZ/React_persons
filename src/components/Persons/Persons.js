@@ -1,17 +1,17 @@
-import React from 'react';
+import React, { Component} from 'react';
 import Person from './Person/Person.js';
 
-const persons = (props) => {
-
-    return (<div>
-                           {props.persons.map((person, ind) => {
+class Persons extends Component {
+    render () {
+            return (<div>
+                           {this.props.persons.map((person, ind) => {
                                 return (
                                     <Person
                                         key={person.id}
                                         name={person.name}
                                         age={person.age}
-                                        changed={ (oEvent) => props.changed(oEvent, person.id)}
-                                        deletePerson ={props.deletePerson.bind(this, ind)}/>
+                                        changed={ (oEvent) => this.props.changed(oEvent, person.id)}
+                                        deletePerson ={this.props.deletePerson.bind(this, ind)}/>
                                 )
 
                            })}
@@ -19,6 +19,8 @@ const persons = (props) => {
 
                     </div>
                 );
-};
+    }
 
-export default persons;
+}
+
+export default Persons;
