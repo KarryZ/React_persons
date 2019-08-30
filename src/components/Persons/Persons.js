@@ -1,17 +1,21 @@
-import React, { Component} from 'react';
+import React, { PureComponent} from 'react';
 import Person from './Person/Person.js';
 
-class Persons extends Component {
+class Persons extends PureComponent {  //PureComponent use for check changes in all props instead of check all props in shouldComponentUpdate
 
-    shouldComponentUpdate(nextProps, nextState) { //can be used for perfomance improvement
-        console.log('[Persons.js] shouldComponentUpdate');
-        if(nextProps.persons !== this.props.persons){
-            return true; //if false component won't update
-        } else {
-            return false;
-        }
-
-    }
+//    shouldComponentUpdate(nextProps, nextState) { //can be used for perfomance improvement
+//        console.log('[Persons.js] shouldComponentUpdate');
+//        if(
+//            nextProps.persons !== this.props.persons ||
+//            nextProps.changed !== this.props.changed ||
+//            nextProps.clicked !== this.props.clicked
+//        ){
+//            return true; //if false component won't update
+//        } else {
+//            return false;
+//        }
+//
+//    }
 
     componentWillUnmount () { //will execute before component is removed from DOM
         console.log('[Persons.js] componentWillUnmount');
