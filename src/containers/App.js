@@ -5,6 +5,7 @@
     import withClass from '../hoc/withClass';
     import Auxilliary from '../hoc/Auxilliary';
 
+
     class App extends Component {
         constructor(props) {
             super(props);
