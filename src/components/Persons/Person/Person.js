@@ -1,6 +1,7 @@
 import React, { Component }  from 'react';
 import classes from './Person.css';
 import Auxilliary from '../../../hoc/Auxilliary.js'
+import withClass from '../../../hoc/withClass.js'
 
 class Person extends Component {
 
@@ -11,15 +12,13 @@ class Person extends Component {
     render () {
         return (
             <Auxilliary>
-                <div className={classes.Person}>
                     <p  onClick={this.props.deletePerson}> I 'm a {this.props.age} {this.props.name}!</p>
                     <p> {this.props.children} </p>
                     <input onChange={this.props.changed} value={this.props.name}/>
-                </div>
             </Auxilliary>
         )
     }
 
 }
 
-export default Person;
+export default withClass(Person, classes.Person);

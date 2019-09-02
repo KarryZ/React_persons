@@ -2,7 +2,8 @@
     import classes from './App.css';
     import Persons from '../components/Persons/Persons';
     import Cockpit from '../components/Cockpit/Cockpit';
-    import WithClass from '../hoc/WithClass';
+    import withClass from '../hoc/withClass';
+    import Auxilliary from '../hoc/Auxilliary';
 
     class App extends Component {
         constructor(props) {
@@ -82,22 +83,21 @@
 
             return (
 
-                     <WithClass classes={classes.App}>
+                     <Auxilliary>
                           <button onClick={this.toggleCockpit}>Remove Cockpit</button>
                           {this.state.showCockpit ?
                                 <Cockpit
                                     appTitle={this.props.appTitle}
                                     togglePersonsHandler={this.togglePersonsHandler.bind(this, 'MaxC1')}
                                     showPersonsState={this.state.showPersons}
-                                    personsLength={this.state.persons.length}/> : null
-                          }
+                                    personsLength={this.state.persons.length}/> : null}
 
                             {persons}
-                        </WithClass>
+                        </Auxilliary>
 
                         // React.createElement('div', {className: "App"}, React.createElement('h1', null, 'Hi, i\'m a React App!!!') )
                     );
         }
     }
-    export default App;
+    export default withClass(App, classes.App);
 
