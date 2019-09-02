@@ -16,7 +16,8 @@
                 {id: 'person2', name: "Nick", age: 25},
                 {id: 'person3', name: "Alex", age: 28} ],
             showPersons: false,
-            showCockpit: true
+            showCockpit: true,
+            changeCounter: 0
         }
 
     static getDerivedStateFromProps(props, state) { // chage states and props
@@ -46,9 +47,13 @@
         const persons = [...this.state.persons];
         persons[currentPersonIndex] = person;
 
-        this.setState({
-            persons: persons
-        })
+        this.setState( (prevState, props) => {
+            return {
+                persons: persons,
+                changeCounter: prevState.changeCounter + 1
+            };
+
+        });
     }
 
     togglePersonsHandler = () => {
