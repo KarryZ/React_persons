@@ -15,7 +15,7 @@
             persons: [
                 {id: 'person1', name: "Max", age: 23},
                 {id: 'person2', name: "Nick", age: 25},
-                {id: 'person3', name: "Alex", age: 28} ],
+                {id: 'person3', name: "Alex", age: 28, focus: true} ],
             showPersons: false,
             showCockpit: true,
             changeCounter: 0
@@ -81,7 +81,8 @@
                           <Persons
                             persons={this.state.persons}
                             changed={this.onChangeNameHandler}
-                            deletePerson={this.deletePerson}/>
+                            deletePerson={this.deletePerson}
+                            />
                           </div>)
             }
 
