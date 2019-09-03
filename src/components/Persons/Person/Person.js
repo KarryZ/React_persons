@@ -11,6 +11,8 @@ class Person extends Component {
         this.inputElementRef = React.createRef();
     }
 
+    static contextType = AuthContext; //available in class-based
+
     componentDidUpdate() { // there you can add http request; not called after initiation
         console.log('[Person.js] componentDidUpdate');
     }
@@ -18,15 +20,15 @@ class Person extends Component {
     componentDidMount() {
         //this.elInput.focus(); //Old version
         this.inputElementRef.current.focus();
+
     }
 
     render () {
         return (
             <Auxilliary>
-                <AuthContext.Consumer>
-                    {(context) =>  context.authenticated ? <p>Authenticated!</p> : <p>Please log in!</p>
-                    }
-                    </AuthContext.Consumer>
+            {this.context.authenticated ? <p>Authenticated!</p> : <p>Please log in!</p>}
+
+
                     <p onClick={this.props.deletePerson}> I 'm {this.props.name} and I am {this.props.age} years old!</p>
                     <p key='i2'> {this.props.children} </p>
                     <input
