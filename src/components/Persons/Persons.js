@@ -1,6 +1,7 @@
 import React, { PureComponent} from 'react';
 import Person from './Person/Person.js';
 
+
 class Persons extends PureComponent {  //PureComponent use for check changes in all props instead of check all props in shouldComponentUpdate
 
 //    shouldComponentUpdate(nextProps, nextState) { //can be used for perfomance improvement
@@ -32,7 +33,8 @@ class Persons extends PureComponent {  //PureComponent use for check changes in 
                                         name={person.name}
                                         age={person.age}
                                         changed={ (oEvent) => this.props.changed(oEvent, person.id)}
-                                        deletePerson ={this.props.deletePerson.bind(this, ind)}/>
+                                        deletePerson ={this.props.deletePerson.bind(this, ind)}
+                                        />
                                 )
 
                            })}

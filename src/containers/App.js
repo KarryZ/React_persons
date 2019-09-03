@@ -4,6 +4,7 @@
     import Cockpit from '../components/Cockpit/Cockpit';
     import withClass from '../hoc/withClass';
     import Auxilliary from '../hoc/Auxilliary';
+    import AuthContext from '../context/auth-context';
 
 
     class App extends Component {
@@ -18,7 +19,8 @@
                 {id: 'person3', name: "Alex", age: 28, focus: true} ],
             showPersons: false,
             showCockpit: true,
-            changeCounter: 0
+            changeCounter: 0,
+            authenticated: false
         }
 
     static getDerivedStateFromProps(props, state) { // chage states and props
@@ -73,6 +75,10 @@
         this.setState({showCockpit: !bShowCockpit})
     }
 
+    loginHandler = () => {
+        this.setState({authenticated: true});
+    }
+
         render() {
             let persons = null;
 
@@ -92,14 +98,21 @@
 
                      <Auxilliary>
                           <button onClick={this.toggleCockpit}>Remove Cockpit</button>
+                          <AuthContext.Provider
+                            value={{
+                                authenticated: this.state.authenticated,
+                                login: this.loginHandler
+                          }}>
                           {this.state.showCockpit ?
                                 <Cockpit
                                     appTitle={this.props.appTitle}
                                     togglePersonsHandler={this.togglePersonsHandler.bind(this, 'MaxC1')}
                                     showPersonsState={this.state.showPersons}
-                                    personsLength={this.state.persons.length}/> : null}
+                                    personsLength={this.state.persons.length}
+                                    /> : null}
 
                             {persons}
+                            </AuthContext.Provider>
                         </Auxilliary>
 
                         // React.createElement('div', {className: "App"}, React.createElement('h1', null, 'Hi, i\'m a React App!!!') )
